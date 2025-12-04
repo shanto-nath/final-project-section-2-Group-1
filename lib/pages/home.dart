@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:testproject/widget/widget_support.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -12,11 +13,14 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       body : Container(
-        margin: EdgeInsets.only(top: 100,left: 100,right: 100),
+        margin: EdgeInsets.only(top: 50,left: 10,right: 10),
         child: Column(children: [
-        Text("Shanto", style: TextStyle(color:Colors.black,),)
-
-      ],),),
+        Text("Hello Shanto,",
+         style: AppWidget.boldTextFieldStyle()
+         )
+      ],
+      ),
+      ),
     );
   }
 }
