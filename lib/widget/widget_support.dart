@@ -18,11 +18,20 @@ class AppWidget {
       fontFamily: 'Poppins',);
   }
 
-    static TextStyle LightTextFieldStyle() {
+    static TextStyle LightTextFieldStyle(){
     return TextStyle(
       color: Colors.black38,
       fontSize: 15.0,
       fontWeight: FontWeight.w500,
       fontFamily: 'Poppins',);
   }
+    static TextStyle semibooldTextFieldStyle(){
+    return TextStyle(
+      color: Colors.black38,
+      fontSize: 18.0,
+      fontWeight: FontWeight.w500,
+      fontFamily: 'Poppins',);
+  }
+
+
 }
