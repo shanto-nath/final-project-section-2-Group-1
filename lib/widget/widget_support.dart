@@ -6,6 +6,23 @@ class AppWidget {
       color: Colors.black,
       fontSize: 20.0,
       fontWeight: FontWeight.bold,
-      fontFamily: 'Poppins');
+      fontFamily: 'Poppins',
+    );
+  }
+
+  static TextStyle HeadlineTextFieldStyle() {
+    return TextStyle(
+      color: Colors.black,
+      fontSize: 24.0,
+      fontWeight: FontWeight.bold,
+      fontFamily: 'Poppins',);
+  }
+
+    static TextStyle LightTextFieldStyle() {
+    return TextStyle(
+      color: Colors.black38,
+      fontSize: 15.0,
+      fontWeight: FontWeight.w500,
+      fontFamily: 'Poppins',);
   }
 }
