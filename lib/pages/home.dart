@@ -151,7 +151,7 @@ class _HomeState extends State<Home> {
                       SizedBox(width: 20.8),
                       Column(
                         children: [
-                          Container(
+                          SizedBox(
                             width: MediaQuery.of(context).size.width / 2,
                             child: Text(
                               "Mediterranean Chickpea Salad",
@@ -159,7 +159,7 @@ class _HomeState extends State<Home> {
                             ),
                           ),
                           SizedBox(height: 5.0),
-                          Container(
+                          SizedBox(
                             width: MediaQuery.of(context).size.width / 2,
                             child: Text(
                               "Honey goot cheese",
@@ -167,7 +167,7 @@ class _HomeState extends State<Home> {
                             ),
                           ),
                           SizedBox(height: 5.0),
-                          Container(
+                          SizedBox(
                             width: MediaQuery.of(context).size.width / 2,
                             child: Text(
                               "\$28",
