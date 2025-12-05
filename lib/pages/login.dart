@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:testproject/widget/widget_support.dart';
 
 class LogIn extends StatefulWidget {
   const LogIn({super.key});
@@ -29,12 +30,34 @@ class _LogInState extends State<LogIn> {
               margin: EdgeInsets.only(top: MediaQuery.of(context).size.height/3),
               height: MediaQuery.of(context).size.height/2,
               width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(color: Colors.cyanAccent, borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20))),
+              decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.only(topLeft: Radius.circular(40), topRight: Radius.circular(40))),
               child: Text(''),
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 60.0, left: 20.0, right: 20.0),
+              child: Column(children: [
+                Center(child: Image.asset("images/logo.png", width: MediaQuery.of(context).size.width/1.5, fit: BoxFit.cover,)),
+                SizedBox(height: 50.0,),
+
+                Material(
+                  elevation: 5.0,
+                  borderRadius: BorderRadius.circular(20),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height/2,
+                    decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20)),
+                    child: Column(children: [
+                      SizedBox(height: 30.0,),
+                      Text('Login', style: AppWidget.HeadlineTextFieldStyle(),)
+                    ],),
+                  ),
+                )
+              ],),
             )
           ],
         ),
       ),
+
     );
   }
 }
