@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:testproject/pages/bottomnav.dart';
 import 'package:testproject/pages/home.dart';
+import 'package:testproject/pages/login.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: BottomNav(),
+      home: LogIn(),
     );
   }
 }
