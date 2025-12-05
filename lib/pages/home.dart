@@ -98,33 +98,43 @@ class _HomeState extends State<Home> {
                 ),
               ],),
             ),
-            SizedBox(height: 30.8,),
-             Container(
-              child:Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                Image.asset(
-                  "images/salad.png", 
-                  height: 120, 
-                  width: 120, 
-                  fit: BoxFit.cover,
-                  ),
-                  SizedBox(width: 20.8,),
-                  Column(children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width/2,
-                      child: Text("Mediterranean Chickpea Salad", style: AppWidget.semibooldTextFieldStyle(),)),
-                      SizedBox(height: 5.0,),
-                      Container(
-                      width: MediaQuery.of(context).size.width/2,
-                      child: Text("Honey goot cheese", style: AppWidget.LightTextFieldStyle(),)),
-                       SizedBox(height: 5.0,),
-                      Container(
-                      width: MediaQuery.of(context).size.width/2,
-                      child: Text("\$28", style: AppWidget.semibooldTextFieldStyle(),))
-                  ],)
-              ],
+            SizedBox(
+              height: 30.8,
               ),
+             Container(
+               margin: EdgeInsets.only(right: 20.0),
+               child: Material(
+                 elevation: 5.0,
+                 borderRadius: BorderRadius.circular(20),
+                 child: Container(
+                  padding: EdgeInsets.all(5),
+                  child:Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                    Image.asset(
+                      "images/salad.png", 
+                      height: 120, 
+                      width: 120, 
+                      fit: BoxFit.cover,
+                      ),
+                      SizedBox(width: 20.8,),
+                      Column(children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width/2,
+                          child: Text("Mediterranean Chickpea Salad", style: AppWidget.semibooldTextFieldStyle(),)),
+                          SizedBox(height: 5.0,),
+                          Container(
+                          width: MediaQuery.of(context).size.width/2,
+                          child: Text("Honey goot cheese", style: AppWidget.LightTextFieldStyle(),)),
+                           SizedBox(height: 5.0,),
+                          Container(
+                          width: MediaQuery.of(context).size.width/2,
+                          child: Text("\$28", style: AppWidget.semibooldTextFieldStyle(),))
+                      ],)
+                  ],
+                  ),
+                 ),
+               ),
              ),
              
           ],
