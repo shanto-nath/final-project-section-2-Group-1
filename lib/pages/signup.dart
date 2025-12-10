@@ -10,6 +10,12 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
+
+  String email="", password="", name="";
+
+
+
+
   final Color primaryOrange = const Color(0xFFff5c30);
 
   @override
