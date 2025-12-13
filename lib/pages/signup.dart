@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:testproject/pages/bottomnav.dart';
 import 'package:testproject/pages/login.dart';
 import 'package:testproject/widget/widget_support.dart' show AppWidget;
 
@@ -12,6 +14,47 @@ class Signup extends StatefulWidget {
 class _SignupState extends State<Signup> {
 
   String email="", password="", name="";
+
+  TextEditingController namecontroller=new TextEditingController();
+
+  TextEditingController passwordcontroller=new TextEditingController();
+
+  TextEditingController mailcontroller=new TextEditingController();
+
+  final _formkey=GlobalKey<FormState>();
+
+  registration()async{
+if(password!=null){
+  try{
+    UserCredential userCredential= await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
+
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      backgroundColor: Colors.redAccent,
+        content: Text(
+      "Registered Successfully", 
+      style: TextStyle(fontSize: 20.0),
+    )));
+    // ignore: use_build_context_synchronously
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>BottomNav()));
+  } on FirebaseException catch(e){
+    if(e.code=='Weak-password'){
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        backgroundColor: Colors.orangeAccent,
+         content: Text(
+        "Password Provided is too weak", 
+        style: TextStyle(fontSize: 18.0),
+      )));
+    } else if(e.code=='email-already-in-use'){
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        backgroundColor: Colors.orangeAccent,
+         content: Text(
+        "Account Already Exists", 
+        style: TextStyle(fontSize: 18.0),
+      )));
+    }
+  }
+}
+  }
 
 
 
@@ -73,80 +116,116 @@ class _SignupState extends State<Signup> {
                     const SizedBox(height: 20.0),
 
                     // The Card with Shadow
-                    Material(
-                      elevation: 5.0,
-                      borderRadius: BorderRadius.circular(20),
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
-                        width: screenWidth,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Center(
-                              child: Text(
-                                'Sign up',
-                                style: AppWidget.HeadlineTextFieldStyle(),
-                              ),
-                            ),
-                            const SizedBox(height: 30.0),
-                            TextField(
-                              decoration: InputDecoration(
-                                hintText: 'Name',
-                                hintStyle: AppWidget.semibooldTextFieldStyle(),
-                                prefixIcon: const Icon(Icons.person_outline, color: Colors.grey),
-                                border: const UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
-                                focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: primaryOrange)),
-                              ),
-                            ),
-                            const SizedBox(height: 30.0),
-                            TextField(
-                              decoration: InputDecoration(
-                                hintText: 'Email',
-                                hintStyle: AppWidget.semibooldTextFieldStyle(),
-                                prefixIcon: const Icon(Icons.email_outlined, color: Colors.grey),
-                                border: const UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
-                                focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: primaryOrange)),
-                              ),
-                            ),
-                            const SizedBox(height: 30.0),
-                            TextField(
-                              obscureText: true,
-                              decoration: InputDecoration(
-                                hintText: 'Password',
-                                hintStyle: AppWidget.semibooldTextFieldStyle(),
-                                prefixIcon: const Icon(Icons.lock_outline, color: Colors.grey),
-                                border: const UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
-                                focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: primaryOrange)),
-                              ),
-                            ),
-                            const SizedBox(height: 40.0),
-                            Center(
-                              child: Material(
-                                elevation: 5.0,
-                                borderRadius: BorderRadius.circular(10),
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 80.0),
-                                  decoration: BoxDecoration(
-                                    color: primaryOrange,
-                                    borderRadius: BorderRadius.circular(10),
+                    GestureDetector(
+                      onTap: ()async{
+                        if(_formkey.currentState!.validate()){
+                          setState(() {
+                            email=mailcontroller.text;
+                            name=namecontroller.text;
+                            password=passwordcontroller.text;
+                          });
+                        }
+                        registration();
+                      },
+                      child: Material(
+                        elevation: 5.0,
+                        borderRadius: BorderRadius.circular(20),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
+                          width: screenWidth,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Form(
+                            key: _formkey,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Center(
+                                  child: Text(
+                                    'Sign up',
+                                    style: AppWidget.HeadlineTextFieldStyle(),
                                   ),
-                                  child: const Text(
-                                    "SIGN UP",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18.0,
-                                      fontFamily: 'Poppins1',
-                                      fontWeight: FontWeight.bold,
+                                ),
+                                const SizedBox(height: 30.0),
+                                TextFormField(
+                                  controller: namecontroller,
+                                  validator: (value){
+                                    if(value==null|| value.isEmpty){
+                                      return 'Please Enter Your Name';
+                                    }
+                                    return null;
+                                  },
+                                  decoration: InputDecoration(
+                                    hintText: 'Name',
+                                    hintStyle: AppWidget.semibooldTextFieldStyle(),
+                                    prefixIcon: const Icon(Icons.person_outline, color: Colors.grey),
+                                    border: const UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
+                                    focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: primaryOrange)),
+                                  ),
+                                ),
+                                const SizedBox(height: 30.0),
+                                TextFormField(
+                                  controller: mailcontroller,
+                                  validator: (value){
+                                    if(value==null|| value.isEmpty){
+                                      return 'Please Enter Your E-mail';
+                                    }
+                                    return null;
+                                  },
+                                  decoration: InputDecoration(
+                                    hintText: 'Email',
+                                    hintStyle: AppWidget.semibooldTextFieldStyle(),
+                                    prefixIcon: const Icon(Icons.email_outlined, color: Colors.grey),
+                                    border: const UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
+                                    focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: primaryOrange)),
+                                  ),
+                                ),
+                                const SizedBox(height: 30.0),
+                                TextFormField(
+                                  controller: passwordcontroller,
+                                  validator: (value){
+                                    if(value==null|| value.isEmpty){
+                                      return 'Please Enter Your Password';
+                                    }
+                                    return null;
+                                  },
+                                  obscureText: true,
+                                  decoration: InputDecoration(
+                                    hintText: 'Password',
+                                    hintStyle: AppWidget.semibooldTextFieldStyle(),
+                                    prefixIcon: const Icon(Icons.lock_outline, color: Colors.grey),
+                                    border: const UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
+                                    focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: primaryOrange)),
+                                  ),
+                                ),
+                                const SizedBox(height: 40.0),
+                                Center(
+                                  child: Material(
+                                    elevation: 5.0,
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: Container(
+                                      padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 80.0),
+                                      decoration: BoxDecoration(
+                                        color: primaryOrange,
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: const Text(
+                                        "SIGN UP",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 18.0,
+                                          fontFamily: 'Poppins1',
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
+                              ],
                             ),
-                          ],
+                          ),
                         ),
                       ),
                     ),
