@@ -13,7 +13,10 @@ class LogIn extends StatefulWidget {
 
 class _LogInState extends State<LogIn> {
 
-String email="", password="";
+  String email="", password="";
+
+  final _formkey= GlobalKey<FormState>();
+
 
 TextEditingController usermailcontroller= new TextEditingController();
 TextEditingController userpasswordcontroller= new TextEditingController();
@@ -80,43 +83,72 @@ userLogin()async{
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height/2,
                     decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20)),
-                    child: Column(children: [
-                      SizedBox(height: 30.0,),
-                      Text('Login', style: AppWidget.HeadlineTextFieldStyle(),),
-                    TextField(
-                      decoration: InputDecoration(hintText: 'Email', hintStyle: AppWidget.semibooldTextFieldStyle(), prefixIcon: Icon(Icons.email_outlined)),
-                    ), 
-                     TextField(
-                      obscureText: true,
-                      decoration: InputDecoration(hintText: 'Password', hintStyle: AppWidget.semibooldTextFieldStyle(), prefixIcon: Icon(Icons.password)),
-                    ),
-
-                    SizedBox(height: 20.0,),
-                    Container(
-                      alignment: Alignment.topRight,
-                      child: Text("Forgot Password?", style: AppWidget.semibooldTextFieldStyle(),)),
-                      SizedBox(height: 20.0,),
-                      Material(
-                        elevation: 5.0,
-                        borderRadius: BorderRadius.circular(20),
-                        child: Container(
-                          padding: EdgeInsets.symmetric(vertical: 8.0),
-                          width: 200,
-                          decoration: BoxDecoration(color: Color(0Xffff5722), borderRadius: BorderRadius.circular(20)),
-                          child: Center(child: Text("LOGIN", style: TextStyle(color: Colors.white, fontSize: 18.0, fontFamily: 'Poppins1', fontWeight: FontWeight.bold),
-                          )),
-                        ),
-                      ),
-                      SizedBox(height: 70.0,),
-                      GestureDetector(
-                        onTap: (){
-                          Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => Signup()),
-                        );
+                    child: Form(
+                      key: _formkey,
+                      child: Column(
+                        children: [
+                        SizedBox(
+                          height: 30.0,
+                          ),
+                        Text(
+                          'Login',
+                           style: AppWidget.HeadlineTextFieldStyle(),
+                           ),
+                      TextFormField(
+                        controller: usermailcontroller,
+                        validator: (value){
+                          if(value==null|| value.isEmpty){
+                            return "Please Enter Password";
+                          }
+                          return null;
                         },
-                        child: Text("Don't have an account? Sign Up", style: AppWidget.semibooldTextFieldStyle(),))
-                    ],
+                        decoration: InputDecoration(
+                          hintText: 'Email',
+                          hintStyle: AppWidget.semibooldTextFieldStyle(), 
+                          prefixIcon: Icon(Icons.email_outlined)),
+                      ), 
+                       TextFormField(
+                          controller: userpasswordcontroller,
+                        validator: (value){
+                          if(value==null|| value.isEmpty){
+                            return "Please Enter Password";
+                          }
+                          return null;
+                        },
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          hintText: 'Password', 
+                          hintStyle: AppWidget.semibooldTextFieldStyle(), 
+                          prefixIcon: Icon(Icons.password)),
+                      ),
+                      
+                      SizedBox(height: 20.0,),
+                      Container(
+                        alignment: Alignment.topRight,
+                        child: Text("Forgot Password?", style: AppWidget.semibooldTextFieldStyle(),)),
+                        SizedBox(height: 20.0,),
+                        Material(
+                          elevation: 5.0,
+                          borderRadius: BorderRadius.circular(20),
+                          child: Container(
+                            padding: EdgeInsets.symmetric(vertical: 8.0),
+                            width: 200,
+                            decoration: BoxDecoration(color: Color(0Xffff5722), borderRadius: BorderRadius.circular(20)),
+                            child: Center(child: Text("LOGIN", style: TextStyle(color: Colors.white, fontSize: 18.0, fontFamily: 'Poppins1', fontWeight: FontWeight.bold),
+                            )),
+                          ),
+                        ),
+                        SizedBox(height: 70.0,),
+                        GestureDetector(
+                          onTap: (){
+                            Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Signup()),
+                          );
+                          },
+                          child: Text("Don't have an account? Sign Up", style: AppWidget.semibooldTextFieldStyle(),))
+                      ],
+                      ),
                     ),
                   ),
                 ),
