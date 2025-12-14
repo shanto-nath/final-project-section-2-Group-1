@@ -22,7 +22,7 @@ class _HomeState extends State<Home> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Hello Shanto,", style: AppWidget.boldTextFieldStyle()),
+                Text("Welcome,", style: AppWidget.boldTextFieldStyle()),
                 Container(
                   margin: EdgeInsets.only(right: 20.0),
                   padding: EdgeInsets.all(3),
