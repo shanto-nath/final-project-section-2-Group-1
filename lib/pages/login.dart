@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:testproject/pages/signup.dart';
 import 'package:testproject/widget/widget_support.dart';
@@ -10,6 +12,36 @@ class LogIn extends StatefulWidget {
 }
 
 class _LogInState extends State<LogIn> {
+
+String email="", password="";
+
+TextEditingController usermailcontroller= new TextEditingController();
+TextEditingController userpasswordcontroller= new TextEditingController();
+
+userLogin()async{
+  try{
+    await FirebaseAuth.instance.
+    signInWithEmailAndPassword(email: email, password: password);
+  }on FirebaseAuthException catch(e){
+    if(e.code=="User-not-found"){
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(
+          "No User Found for that Email",
+           style: TextStyle(fontSize: 18.0, color: Colors.black),
+           )));
+    }else if(e.code=="wrong-password"){
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(
+          "Wrong Password Provided by User",
+           style: TextStyle(fontSize: 18.0, color: Colors.black),
+           )));
+    }
+  }
+}
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
