@@ -1,2 +1,2 @@
-String publishableKey="";
-String secretKey="";
+String publishableKey = "";
+String secretKey = "";
