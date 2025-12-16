@@ -12,52 +12,61 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
+  String email = "", password = "", name = "";
 
-  String email="", password="", name="";
+  TextEditingController namecontroller = new TextEditingController();
 
-  TextEditingController namecontroller=new TextEditingController();
+  TextEditingController passwordcontroller = new TextEditingController();
 
-  TextEditingController passwordcontroller=new TextEditingController();
+  TextEditingController mailcontroller = new TextEditingController();
 
-  TextEditingController mailcontroller=new TextEditingController();
+  final _formkey = GlobalKey<FormState>();
 
-  final _formkey=GlobalKey<FormState>();
+  registration() async {
+    if (password != null) {
+      try {
+        UserCredential userCredential = await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(email: email, password: password);
 
-  registration()async{
-if(password!=null){
-  try{
-    UserCredential userCredential= await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
-
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      backgroundColor: Colors.redAccent,
-        content: Text(
-      "Registered Successfully", 
-      style: TextStyle(fontSize: 20.0),
-    )));
-    // ignore: use_build_context_synchronously
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>BottomNav()));
-  } on FirebaseException catch(e){
-    if(e.code=='Weak-password'){
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        backgroundColor: Colors.orangeAccent,
-         content: Text(
-        "Password Provided is too weak", 
-        style: TextStyle(fontSize: 18.0),
-      )));
-    } else if(e.code=='email-already-in-use'){
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        backgroundColor: Colors.orangeAccent,
-         content: Text(
-        "Account Already Exists", 
-        style: TextStyle(fontSize: 18.0),
-      )));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Colors.redAccent,
+            content: Text(
+              "Registered Successfully",
+              style: TextStyle(fontSize: 20.0),
+            ),
+          ),
+        );
+        // ignore: use_build_context_synchronously
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => BottomNav()),
+        );
+      } on FirebaseException catch (e) {
+        if (e.code == 'Weak-password') {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              backgroundColor: Colors.orangeAccent,
+              content: Text(
+                "Password Provided is too weak",
+                style: TextStyle(fontSize: 18.0),
+              ),
+            ),
+          );
+        } else if (e.code == 'email-already-in-use') {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              backgroundColor: Colors.orangeAccent,
+              content: Text(
+                "Account Already Exists",
+                style: TextStyle(fontSize: 18.0),
+              ),
+            ),
+          );
+        }
+      }
     }
   }
-}
-  }
-
-
-
 
   final Color primaryOrange = const Color(0xFFff5c30);
 
@@ -67,13 +76,16 @@ if(password!=null){
     final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor: Colors.white, // Set to white so the bottom of screen is white
+      backgroundColor:
+          Colors.white, // Set to white so the bottom of screen is white
       body: Stack(
         children: [
           // 1. TOP LAYER: Orange Gradient Background
           Container(
             width: screenWidth,
-            height: screenHeight / 2.5, // Taller to ensure it covers behind the card
+            height:
+                screenHeight /
+                2.5, // Taller to ensure it covers behind the card
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
@@ -83,7 +95,9 @@ if(password!=null){
             ),
             child: Center(
               child: Padding(
-                padding: const EdgeInsets.only(bottom: 50.0), // Push logo up a bit
+                padding: const EdgeInsets.only(
+                  bottom: 50.0,
+                ), // Push logo up a bit
                 child: Image.asset(
                   "images/logo.png",
                   width: screenWidth / 1.5,
@@ -109,7 +123,11 @@ if(password!=null){
                 ),
               ),
               child: Padding(
-                padding: const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20.0),
+                padding: const EdgeInsets.only(
+                  left: 20.0,
+                  right: 20.0,
+                  bottom: 20.0,
+                ),
                 child: Column(
                   children: [
                     // We need a little spacing inside the white container before the card starts
@@ -117,12 +135,12 @@ if(password!=null){
 
                     // The Card with Shadow
                     GestureDetector(
-                      onTap: ()async{
-                        if(_formkey.currentState!.validate()){
+                      onTap: () async {
+                        if (_formkey.currentState!.validate()) {
                           setState(() {
-                            email=mailcontroller.text;
-                            name=namecontroller.text;
-                            password=passwordcontroller.text;
+                            email = mailcontroller.text;
+                            name = namecontroller.text;
+                            password = passwordcontroller.text;
                           });
                         }
                         registration();
@@ -131,7 +149,10 @@ if(password!=null){
                         elevation: 5.0,
                         borderRadius: BorderRadius.circular(20),
                         child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 20.0,
+                            vertical: 30.0,
+                          ),
                           width: screenWidth,
                           decoration: BoxDecoration(
                             color: Colors.white,
@@ -151,42 +172,66 @@ if(password!=null){
                                 const SizedBox(height: 30.0),
                                 TextFormField(
                                   controller: namecontroller,
-                                  validator: (value){
-                                    if(value==null|| value.isEmpty){
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
                                       return 'Please Enter Your Name';
                                     }
                                     return null;
                                   },
                                   decoration: InputDecoration(
                                     hintText: 'Name',
-                                    hintStyle: AppWidget.semibooldTextFieldStyle(),
-                                    prefixIcon: const Icon(Icons.person_outline, color: Colors.grey),
-                                    border: const UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
-                                    focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: primaryOrange)),
+                                    hintStyle:
+                                        AppWidget.semibooldTextFieldStyle(),
+                                    prefixIcon: const Icon(
+                                      Icons.person_outline,
+                                      color: Colors.grey,
+                                    ),
+                                    border: const UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                    focusedBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: primaryOrange,
+                                      ),
+                                    ),
                                   ),
                                 ),
                                 const SizedBox(height: 30.0),
                                 TextFormField(
                                   controller: mailcontroller,
-                                  validator: (value){
-                                    if(value==null|| value.isEmpty){
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
                                       return 'Please Enter Your E-mail';
                                     }
                                     return null;
                                   },
                                   decoration: InputDecoration(
                                     hintText: 'Email',
-                                    hintStyle: AppWidget.semibooldTextFieldStyle(),
-                                    prefixIcon: const Icon(Icons.email_outlined, color: Colors.grey),
-                                    border: const UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
-                                    focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: primaryOrange)),
+                                    hintStyle:
+                                        AppWidget.semibooldTextFieldStyle(),
+                                    prefixIcon: const Icon(
+                                      Icons.email_outlined,
+                                      color: Colors.grey,
+                                    ),
+                                    border: const UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                    focusedBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: primaryOrange,
+                                      ),
+                                    ),
                                   ),
                                 ),
                                 const SizedBox(height: 30.0),
                                 TextFormField(
                                   controller: passwordcontroller,
-                                  validator: (value){
-                                    if(value==null|| value.isEmpty){
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
                                       return 'Please Enter Your Password';
                                     }
                                     return null;
@@ -194,10 +239,22 @@ if(password!=null){
                                   obscureText: true,
                                   decoration: InputDecoration(
                                     hintText: 'Password',
-                                    hintStyle: AppWidget.semibooldTextFieldStyle(),
-                                    prefixIcon: const Icon(Icons.lock_outline, color: Colors.grey),
-                                    border: const UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
-                                    focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: primaryOrange)),
+                                    hintStyle:
+                                        AppWidget.semibooldTextFieldStyle(),
+                                    prefixIcon: const Icon(
+                                      Icons.lock_outline,
+                                      color: Colors.grey,
+                                    ),
+                                    border: const UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                    focusedBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: primaryOrange,
+                                      ),
+                                    ),
                                   ),
                                 ),
                                 const SizedBox(height: 40.0),
@@ -206,7 +263,10 @@ if(password!=null){
                                     elevation: 5.0,
                                     borderRadius: BorderRadius.circular(10),
                                     child: Container(
-                                      padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 80.0),
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 15.0,
+                                        horizontal: 80.0,
+                                      ),
                                       decoration: BoxDecoration(
                                         color: primaryOrange,
                                         borderRadius: BorderRadius.circular(10),
@@ -232,7 +292,10 @@ if(password!=null){
                     const SizedBox(height: 40.0),
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => LogIn()));
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => LogIn()),
+                        );
                       },
                       child: Text(
                         "Already have an account? Login",

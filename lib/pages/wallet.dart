@@ -14,22 +14,28 @@ class Wallet extends StatefulWidget {
 }
 
 class _WalletState extends State<Wallet> {
-Map<String, dynamic>? paymentIntent;
+  Map<String, dynamic>? paymentIntent;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-
         margin: EdgeInsets.only(top: 60.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-        Material(
-          elevation: 2.0,
-          child: Container(
-            padding: EdgeInsets.only(bottom: 10.0),
-            child: Center(child: Text("Wallet", style: AppWidget.HeadlineTextFieldStyle(),)))),
-            SizedBox(height: 30.0,),
+            Material(
+              elevation: 2.0,
+              child: Container(
+                padding: EdgeInsets.only(bottom: 10.0),
+                child: Center(
+                  child: Text(
+                    "Wallet",
+                    style: AppWidget.HeadlineTextFieldStyle(),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 30.0),
             Container(
               padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
               width: MediaQuery.of(context).size.width,
@@ -37,91 +43,114 @@ Map<String, dynamic>? paymentIntent;
               child: Row(
                 children: [
                   Image.asset(
-                    "images/wallet.png", 
-                    height: 60, 
-                    width: 60, 
+                    "images/wallet.png",
+                    height: 60,
+                    width: 60,
                     fit: BoxFit.cover,
                   ),
-                  SizedBox(width: 40.0,),
+                  SizedBox(width: 40.0),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                    Text("Your Wallet", style: AppWidget.LightTextFieldStyle(),),
-                    SizedBox(height: 5.0,),
-                    Text("\$"+ "100", style: AppWidget.boldTextFieldStyle(),)
-                  ],)
+                      Text(
+                        "Your Wallet",
+                        style: AppWidget.LightTextFieldStyle(),
+                      ),
+                      SizedBox(height: 5.0),
+                      Text("\$" + "100", style: AppWidget.boldTextFieldStyle()),
+                    ],
+                  ),
                 ],
               ),
             ),
-            SizedBox(height: 20.0,),
+            SizedBox(height: 20.0),
             Padding(
               padding: const EdgeInsets.only(left: 20.0),
-              child: Text("Add money", style: AppWidget.semibooldTextFieldStyle(),),
+              child: Text(
+                "Add money",
+                style: AppWidget.semibooldTextFieldStyle(),
+              ),
             ),
-            SizedBox(height: 10.0,),
+            SizedBox(height: 10.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Container(
                   padding: EdgeInsets.all(5),
                   decoration: BoxDecoration(
-                      border: Border.all(color: Color(0xFFE9E2E2)), 
-                      borderRadius: BorderRadius.circular(5)),
+                    border: Border.all(color: Color(0xFFE9E2E2)),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
                   child: Text(
-                    "\$"+"100", 
+                    "\$" + "100",
                     style: AppWidget.semibooldTextFieldStyle(),
-                  ), 
+                  ),
                 ),
-                  Container(
+                Container(
                   padding: EdgeInsets.all(5),
                   decoration: BoxDecoration(
-                      border: Border.all(color: Color(0xFFE9E2E2)), 
-                      borderRadius: BorderRadius.circular(5)),
+                    border: Border.all(color: Color(0xFFE9E2E2)),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
                   child: Text(
-                    "\$"+"500", 
+                    "\$" + "500",
                     style: AppWidget.semibooldTextFieldStyle(),
-                  ), 
+                  ),
                 ),
-                  Container(
+                Container(
                   padding: EdgeInsets.all(5),
                   decoration: BoxDecoration(
-                      border: Border.all(color: Color(0xFFE9E2E2)), 
-                      borderRadius: BorderRadius.circular(5)),
+                    border: Border.all(color: Color(0xFFE9E2E2)),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
                   child: Text(
-                    "\$"+"1000", 
+                    "\$" + "1000",
                     style: AppWidget.semibooldTextFieldStyle(),
-                  ), 
+                  ),
                 ),
-                  Container(
+                Container(
                   padding: EdgeInsets.all(5),
                   decoration: BoxDecoration(
-                      border: Border.all(color: Color(0xFFE9E2E2)), 
-                      borderRadius: BorderRadius.circular(5)),
+                    border: Border.all(color: Color(0xFFE9E2E2)),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
                   child: Text(
-                    "\$"+"2000", 
+                    "\$" + "2000",
                     style: AppWidget.semibooldTextFieldStyle(),
-                  ), 
+                  ),
                 ),
-                SizedBox(height: 50.0,),
+                SizedBox(height: 50.0),
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 20.0),
                   padding: EdgeInsets.symmetric(vertical: 12.0),
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
-                    color: Color(0xFF008080), borderRadius: BorderRadius.circular(8)
+                    color: Color(0xFF008080),
+                    borderRadius: BorderRadius.circular(8),
                   ),
-                child: Center(child: Text("Add Money", style: TextStyle(color: Colors.white, fontSize: 16.0, fontFamily: "Poppins", fontWeight: FontWeight.bold),),),)
+                  child: Center(
+                    child: Text(
+                      "Add Money",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16.0,
+                        fontFamily: "Poppins",
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
               ],
-            )
+            ),
           ],
         ),
       ),
     );
   }
 
-  Future<void> makePayment(String amount) async{
-    try{
-      paymentIntent= await createPaymentIntent(amount, "BDT");
+  Future<void> makePayment(String amount) async {
+    try {
+      paymentIntent = await createPaymentIntent(amount, "BDT");
       // await Stripe.instance
       //     .initPaymentSheet(
       //         paymentSheetParameters: SetupPaymentSheetParameters(
@@ -131,23 +160,23 @@ Map<String, dynamic>? paymentIntent;
       //     .then((value){});
 
       displayPaymentSheet(amount);
-    }catch(e,s){
-     print("exception: $e$s");
+    } catch (e, s) {
+      print("exception: $e$s");
     }
   }
 
-  displayPaymentSheet(String amount)async{
-    try{
+  displayPaymentSheet(String amount) async {
+    try {
       // await Stripe.instance.presentPaymentSheet().then((value) async{
       //   showDialog(
-      //     context: context, 
+      //     context: context,
       //     builder:(_)=> AlertDialog(
       //           content: Column(
       //             children: [
       //               Row(
       //                 children: [
       //                   Icon(
-      //                     Icons.check_circle, 
+      //                     Icons.check_circle,
       //                     color: Colors.green,
       //                   ),
       //                   Text("Payment Successful")
@@ -157,55 +186,49 @@ Map<String, dynamic>? paymentIntent;
       //           ),
       //         ));
 
-  //     paymentIntent=null;
-  //  }).onError((error, stackTrace){
-  //    print("Error is:---> $error $stackTrace");
-  //  });
-  
-  // }on StripeException catch(e){
-  //  print("error is:---> $e");
-  //  showDialog(
-  //   context: context, 
-  //   builder: (_)=> const AlertDialog(
-  //         content: Text("Cancelled"),
-  //       ));
-  }catch (e){
-  print("$e");
-}
+      //     paymentIntent=null;
+      //  }).onError((error, stackTrace){
+      //    print("Error is:---> $error $stackTrace");
+      //  });
+
+      // }on StripeException catch(e){
+      //  print("error is:---> $e");
+      //  showDialog(
+      //   context: context,
+      //   builder: (_)=> const AlertDialog(
+      //         content: Text("Cancelled"),
+      //       ));
+    } catch (e) {
+      print("$e");
+    }
   }
 
+  createPaymentIntent(String amount, String currency) async {
+    try {
+      Map<String, dynamic> body = {
+        "amount": calculateAmount(amount),
+        "currency": currency,
+        "payment_method_types[]": "card",
+      };
 
-createPaymentIntent(String amount, String currency)async
-{
-  try{
-    Map<String, dynamic> body={
-"amount": calculateAmount(amount),
-"currency": currency,
-"payment_method_types[]": "card",
-    };
-
-
-
-    var response= await http.post(
-      Uri.parse("http://api.stripe.com/v1/payment_intents"),
-      headers: {
-        "Authorization": "Bearer $secretKey",
-        "Content-Type":"application/x-www-form-urlencoded"
-      },
-      body: body,
-    );
-    print("Payment Intent body->>> ${response.body.toString()}");
-    return jsonDecode(response.body);
-
-  }catch(err){
-    print("err charging user: ${err.toString()}");
+      var response = await http.post(
+        Uri.parse("http://api.stripe.com/v1/payment_intents"),
+        headers: {
+          "Authorization": "Bearer $secretKey",
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: body,
+      );
+      print("Payment Intent body->>> ${response.body.toString()}");
+      return jsonDecode(response.body);
+    } catch (err) {
+      print("err charging user: ${err.toString()}");
+    }
   }
-}
 
-calculateAmount(String amount){
-  final calculatedAmount=(int.parse(amount)*100);
+  calculateAmount(String amount) {
+    final calculatedAmount = (int.parse(amount) * 100);
 
-  return calculatedAmount.toString();
-}
-
+    return calculatedAmount.toString();
+  }
 }

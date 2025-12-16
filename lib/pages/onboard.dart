@@ -80,25 +80,35 @@ class _OnboardState extends State<Onboard> {
             onTap: () {
               if (currentIndex == contents.length - 1) {
                 Navigator.pushReplacement(
-                    context, MaterialPageRoute(builder: (context) => Signup()));
+                  context,
+                  MaterialPageRoute(builder: (context) => Signup()),
+                );
               }
               _controller.nextPage(
-                  duration: const Duration(milliseconds: 100),
-                  curve: Curves.bounceIn);
+                duration: const Duration(milliseconds: 100),
+                curve: Curves.bounceIn,
+              );
             },
             child: Container(
-              decoration: BoxDecoration(color: Colors.red, borderRadius: BorderRadius.circular(20)),
+              decoration: BoxDecoration(
+                color: Colors.red,
+                borderRadius: BorderRadius.circular(20),
+              ),
               height: 60,
               margin: const EdgeInsets.all(40),
               width: double.infinity,
               child: Center(
                 child: Text(
-                 currentIndex == contents.length - 1?"Start": "Next",
-                  style: const TextStyle(color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold),
-                    ),
+                  currentIndex == contents.length - 1 ? "Start" : "Next",
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );
