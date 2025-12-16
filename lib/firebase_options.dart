@@ -25,15 +25,9 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -47,28 +41,49 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAWb28nO8WH3jr1UuoKXwdGFzXYSRbsrLQ',
-    appId: '1:1031820053214:web:8b80107d75dbdabd3cd04f',
-    messagingSenderId: '1031820053214',
-    projectId: 'mobileappproject-e6b25',
-    authDomain: 'mobileappproject-e6b25.firebaseapp.com',
-    storageBucket: 'mobileappproject-e6b25.firebasestorage.app',
+    apiKey: 'AIzaSyCA-69oOK9V020-1HI23uB1ba3tHOcce1A',
+    appId: '1:931717690308:web:08e2b098c965b64dcc2a91',
+    messagingSenderId: '931717690308',
+    projectId: 'fooddeliveryapp-18349',
+    authDomain: 'fooddeliveryapp-18349.firebaseapp.com',
+    storageBucket: 'fooddeliveryapp-18349.firebasestorage.app',
+    measurementId: 'G-7Z3VG0S1FZ',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCxUp89uWEM6Dmqwh621q3cZe-by8b50lU',
-    appId: '1:1031820053214:android:e623968b91ccd46c3cd04f',
-    messagingSenderId: '1031820053214',
-    projectId: 'mobileappproject-e6b25',
-    storageBucket: 'mobileappproject-e6b25.firebasestorage.app',
+    apiKey: 'AIzaSyCzAQu-CtpAO2rQ1qd2ju2m1-BWwdHztAE',
+    appId: '1:931717690308:android:fe4cea11591c0858cc2a91',
+    messagingSenderId: '931717690308',
+    projectId: 'fooddeliveryapp-18349',
+    storageBucket: 'fooddeliveryapp-18349.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBVSd_CqAE0b1Isxk_9eZQaw7X58aqzq3w',
-    appId: '1:1031820053214:ios:bae72f4f8d50f0db3cd04f',
-    messagingSenderId: '1031820053214',
-    projectId: 'mobileappproject-e6b25',
-    storageBucket: 'mobileappproject-e6b25.firebasestorage.app',
+    apiKey: 'AIzaSyCjU2HYDB519-taS6J4NlQXpzmDAI2hmLc',
+    appId: '1:931717690308:ios:0cf8a8b63729eb5ccc2a91',
+    messagingSenderId: '931717690308',
+    projectId: 'fooddeliveryapp-18349',
+    storageBucket: 'fooddeliveryapp-18349.firebasestorage.app',
     iosBundleId: 'com.example.testproject',
   );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyCjU2HYDB519-taS6J4NlQXpzmDAI2hmLc',
+    appId: '1:931717690308:ios:0cf8a8b63729eb5ccc2a91',
+    messagingSenderId: '931717690308',
+    projectId: 'fooddeliveryapp-18349',
+    storageBucket: 'fooddeliveryapp-18349.firebasestorage.app',
+    iosBundleId: 'com.example.testproject',
+  );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyCA-69oOK9V020-1HI23uB1ba3tHOcce1A',
+    appId: '1:931717690308:web:7d2cfa927f379f50cc2a91',
+    messagingSenderId: '931717690308',
+    projectId: 'fooddeliveryapp-18349',
+    authDomain: 'fooddeliveryapp-18349.firebaseapp.com',
+    storageBucket: 'fooddeliveryapp-18349.firebasestorage.app',
+    measurementId: 'G-WLJVY9Y9GR',
+  );
+
 }
