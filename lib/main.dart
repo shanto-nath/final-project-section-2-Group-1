@@ -7,12 +7,10 @@ import 'package:testproject/pages/onboard.dart';
 import 'package:testproject/pages/signup.dart';
 import 'package:testproject/widget/app_constant.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // Stripe.publishableKey = publishableKey;
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-);
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 
