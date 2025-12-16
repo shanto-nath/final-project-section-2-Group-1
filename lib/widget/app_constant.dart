@@ -1,2 +1,2 @@
-// String publishableKey="pk_test_51SeZZg23jqa748BxpyfG7kYHDHoNL5wIyIWPHzuuZAVh5awtcI886Zd3sCBHiiVTGcuuqJyHAb7xwwv6nxbBP8sI00W0bfPf3v";
-// String secretKey="sk_test_51SeZZg23jqa748BxNN8OANlEWMC73z6092PzVICCdQTDc0lDL1OL72t3GtI6YBV4XLiVK8HMna3f1ZBdwJZa7rBZ00s835s1Xl";
+String publishableKey="";
+String secretKey="";
