@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:testproject/admin/home_admin.dart';
 // import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:testproject/firebase_options.dart';
 import 'package:testproject/pages/login.dart';
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: Onboard(),
+      home: HomeAdmin(),
     );
   }
 }
