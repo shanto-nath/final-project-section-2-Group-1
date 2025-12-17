@@ -127,5 +127,3 @@ class _OnboardState extends State<Onboard> {
   }
 }
 
-
-Get()
