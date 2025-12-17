@@ -50,9 +50,7 @@ class _SignupState extends State<Signup> {
               content: Text(
                 "Password Provided is too weak",
                 style: TextStyle(fontSize: 18.0),
-              ),
-            ),
-          );
+              )));
         } else if (e.code == 'email-already-in-use') {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
